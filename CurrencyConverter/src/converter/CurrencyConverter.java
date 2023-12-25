@@ -4,23 +4,23 @@ import java. util.*;
 //import java.lang.*;
 
 public class CurrencyConverter {
+	public static void main(String[] args) 
+	{
+		converter(0.012, 0.011, 1.10, 0.91, 83.33,90.90 );
+	}
+	public  static void converter(double RtoD, double RtoE, double EtoD, double DtoE, double DtoR, double EtoR ) {
 
-    public static void main(String[] args) {
-    	int run=0;
-    	if(run==0)
-    	{
-    		double RtoD=0.012;
-    		double DtoR=83.18;
-    		double DtoE=0.92;
-    		double EtoD=1.09;
-    		double RtoE=0.011;
-    		double EtoR=90.90;
-    	}
     	System.out.println("Welcome to online currency converter!!");
     	System.out.println("Hi please specify you role by selecting the number alongside given options");
     	System.out.println("To login as an user press: 1");
     	System.out.println("To login as a admin press: 2");
     	Scanner myObj = new Scanner(System.in);
+    	while(!myObj.hasNextInt())
+		{
+			System.out.println("Wrong input!!");
+			System.out.println("Please enter a numeric value");
+			myObj.next();
+		}
     	int role=myObj.nextInt();
     	if (role != 1 && role!=2)
     	{
@@ -31,7 +31,6 @@ public class CurrencyConverter {
     			role = myObj.nextInt();
     			if (role == 1 || role==2)
     				{
-    					run++;
     					break;
     				}
     			else 
@@ -46,12 +45,8 @@ public class CurrencyConverter {
     		Admin( RtoD,  RtoE,  EtoD,  DtoE,  DtoR,  EtoR);
     		break;
     	}
-        
-//System.out.println(DtoR);
-                }
+   }
              
-             
- 
 public static void User(double RtoD, double RtoE, double EtoD, double DtoE, double DtoR, double EtoR)
 {
 	int attempts = 3;
@@ -63,7 +58,6 @@ public static void User(double RtoD, double RtoE, double EtoD, double DtoE, doub
          String userName = myObj.nextLine();
    	 System.out.println("Enter password");
          String passWord = myObj.nextLine();
-    	
          if(!pass.equals(passWord) || !usrName.equals(userName))
          {
         	 while(attempts>0 && (!pass.equals(passWord) ||  !usrName.equals(userName)))
@@ -75,26 +69,28 @@ public static void User(double RtoD, double RtoE, double EtoD, double DtoE, doub
         			 userName = myObj.nextLine();
             		 System.out.println("Enter password");
             		 passWord = myObj.nextLine();
-        			 }
-        		 
+        			 } 
         	 }
         	 if(attempts==0)
         	 {
         		 System.out.println("No retry remaining");
         		 System.exit(attempts);
-        }}
-         
-         if (pass.equals(passWord) &&  usrName.equals(userName)) {
-        	
+             }
+        } 
+         if (pass.equals(passWord) &&  usrName.equals(userName)) 
+         {
             System.out.println("Welcome");
-            // take input
-            
-            System.out.println("1. To view currency rates");
-            System.out.println("2. To convert currency in desired currency");
+            // take input  
+            System.out.println("To view currency rates press: 1");
+            System.out.println("To convert currency in desired currency: 2");
             System.out.println("Choose your selection");
-            
             Scanner obj = new Scanner(System.in);
-            
+            while(!obj.hasNextInt())
+    		{
+    			System.out.println("Wrong amount!!");
+    			System.out.println("Please enter a numeric amount value");
+    			obj.next();
+    		}
             int selection = obj.nextInt();
             if(selection !=1 && selection !=2)
             {
@@ -112,20 +108,26 @@ public static void User(double RtoD, double RtoE, double EtoD, double DtoE, doub
             
             if(selection == 1)
             {
-            	 System.out.println("1 US dollar to Indian Ruppee = 83.18 INR");
-            	 System.out.println("1 INR to US Dollar = 0.012 US Dollar");
-            	 System.out.println("1 EURO to Indian Ruppee = 90.90 INR");
-            	 System.out.println("1 INR to Euro = 0.011 EURO");
-            	 System.out.println("1 Dollar to Euro = 0.92 EURO ");
-            	 System.out.println("1 Euro to US Dollar = 1.09 US Dollar ");
+             System.out.println("1 US dollar to Indian Ruppee = "+String.format("%.2f", DtoR)+ "INR");
+           	 System.out.println("1 INR to US Dollar = "+String.format("%.2f", RtoD)+ "US Dollar");
+           	 System.out.println("1 EURO to Indian Ruppee = "+String.format("%.2f", EtoR)+"INR");
+           	 System.out.println("1 INR to Euro = "+String.format("%.2f", RtoE)+"EURO");
+           	 System.out.println("1 Dollar to Euro = "+String.format("%.2f", DtoE)+"EURO ");
+           	 System.out.println("1 Euro to US Dollar = "+String.format("%.2f", EtoD)+"US Dollar ");
             }
             
             if(selection == 2) {
             Scanner sc = new Scanner(System.in); 
-            System.out.println("1 Ruppe");
-            System.out.println("2 Dollar");
-            System.out.println("3 Euro");
-            System. out.println("Choose the currency");
+            System. out.println("Choose your currency you want to convert");
+            System.out.println("If you want to convert Ruppe press: 1");
+            System.out.println("If you want to convert Dollar press: 2");
+            System.out.println("If you want to convert Euro press: 3");
+            while(!sc.hasNextInt())
+    		{
+    			System.out.println("Wrong amount!!");
+    			System.out.println("Please enter a numeric amount value");
+    			sc.next();
+    		}
         	int choice = sc.nextInt();
         	if (choice != 1 && choice!=2 && choice!= 3)
         	{
@@ -148,39 +150,35 @@ public static void User(double RtoD, double RtoE, double EtoD, double DtoE, doub
             			sc.next();
             		}
             	double amount = sc.nextDouble();
-            	sc.close();
+            	//sc.close();
             	// convert the amount
             switch (choice) {
                 case 1:
                     Ruppe_to_other(amount, RtoD, RtoE);
                     break;
                 case 2:
-                    Dollar_to_other(amount);
+                    Dollar_to_other(amount, DtoR, DtoE);
                     break;
                 case 3:
-                    Euro_to_other(amount);
+                    Euro_to_other(amount, EtoR, EtoD);
                     break;
-                default:
-                    System.out.println("Invalid choice");
             }
-	
-}
-            System.out.println("Press 0 to return to main login");
-             String back=obj.next();
-             if(back=="0")
-             {
-            	 main(null);
-             }
-             else
-            	 System.out.println("Exiting the session");
-         }      }
+         }
+           System.out.println("If you want to start a new session press 0 or and other key to exit");
+           String back=obj.next();
+           if(back.equals("0"))
+        	   User(RtoD,  RtoE,  EtoD,  DtoE,  DtoR,  EtoR);
+           else
+        	   System.out.println("Exiting the session");
+         }
+              
+         }
 
 public static void Admin(double RtoD, double RtoE, double EtoD, double DtoE, double DtoR, double EtoR)
-{
-	
+{	
 	int attempts_admin = 3;
-    String usrName_admin = "USERNAME";
-	String pass_admin = "User123";
+    String usrName_admin = "ADMIN";
+	String pass_admin = "Admin123";
  // Create a Scanner object
 	Scanner myObj=new Scanner(System.in);
 	System.out.println("Enter username");
@@ -216,7 +214,12 @@ public static void Admin(double RtoD, double RtoE, double EtoD, double DtoE, dou
         System.out.println("Choose your selection");
         
         Scanner obj = new Scanner(System.in);
-        
+        while(!obj.hasNextInt())
+		{
+			System.out.println("Wrong amount!!");
+			System.out.println("Please enter a numeric amount value");
+			obj.next();
+		}
         int selection = obj.nextInt();
         if(selection !=1 && selection !=2)
         {
@@ -233,12 +236,12 @@ public static void Admin(double RtoD, double RtoE, double EtoD, double DtoE, dou
         }
         if(selection == 1)
         {
-        	 System.out.println("1 US dollar to Indian Ruppee = 83.18 INR");
-        	 System.out.println("1 INR to US Dollar = 0.012 US Dollar");
-        	 System.out.println("1 EURO to Indian Ruppee = 90.90 INR");
-        	 System.out.println("1 INR to Euro = 0.011 EURO");
-        	 System.out.println("1 Dollar to Euro = 0.92 EURO ");
-        	 System.out.println("1 Euro to US Dollar = 1.09 US Dollar ");
+        	 System.out.println("1 US dollar to Indian Ruppee = "+String.format("%.2f", DtoR)+ "INR");
+        	 System.out.println("1 INR to US Dollar = "+String.format("%.2f", RtoD)+ "US Dollar");
+        	 System.out.println("1 EURO to Indian Ruppee = "+String.format("%.2f", EtoR)+"INR");
+        	 System.out.println("1 INR to Euro = "+String.format("%.2f", RtoE)+"EURO");
+        	 System.out.println("1 Dollar to Euro = "+String.format("%.2f", DtoE)+"EURO ");
+        	 System.out.println("1 Euro to US Dollar = "+String.format("%.2f", EtoD)+"US Dollar ");
         }
         
         if(selection == 2) 
@@ -248,6 +251,12 @@ public static void Admin(double RtoD, double RtoE, double EtoD, double DtoE, dou
         	System.out.println("For 1 Indian Ruppee to 1 Euro : 2");
         	System.out.println("For 1 Euro to 1 US Dollar : 3");
         	Scanner conv=new Scanner(System.in);
+        	while(!conv.hasNextInt())
+    		{
+    			System.out.println("Wrong amount!!");
+    			System.out.println("Please enter a numeric amount value");
+    			conv.next();
+    		}
         	int convchoice=conv.nextInt();
         	 if(convchoice !=1 && convchoice !=2 && convchoice !=3)
              {
@@ -268,8 +277,8 @@ public static void Admin(double RtoD, double RtoE, double EtoD, double DtoE, dou
          		RtoD=conv.nextDouble();
          		DtoR=1/RtoD;
          		System.out.println("New values:");
-         		System.out.println("1 INR="+RtoD+"USD");
-         		System.out.println("1 USD="+DtoR+"INR");
+         		System.out.println("1 INR="+String.format("%.2f", RtoD)+"USD");
+         		System.out.println("1 USD="+String.format("%.2f", DtoR)+"INR");		
          	}	
         	if(convchoice==2)
         	{
@@ -277,8 +286,8 @@ public static void Admin(double RtoD, double RtoE, double EtoD, double DtoE, dou
         		RtoE=conv.nextDouble();
         		EtoR=1/RtoE;
         		System.out.println("New values:");
-        		System.out.println("1 INR="+RtoE+"Euro");
-        		System.out.println("1 Euro="+EtoR+"INR");
+        		System.out.println("1 INR="+String.format("%.2f", RtoE)+"Euro");
+        		System.out.println("1 Euro="+String.format("%.2f", EtoR)+"INR");
         	}
         	if(convchoice==3)
         	{
@@ -286,21 +295,26 @@ public static void Admin(double RtoD, double RtoE, double EtoD, double DtoE, dou
         		EtoD=conv.nextDouble();
         		DtoE=1/EtoD;
         		System.out.println("New values:");
-        		System.out.println("1 Euro="+EtoD+"USD");
-        		System.out.println("1 USD="+DtoE+"Euro");
+        		System.out.println("1 Euro="+String.format("%.2f", EtoD)+"USD");
+        		System.out.println("1 USD="+String.format("%.2f", DtoE)+"Euro");	
         	}	
         }
-        System.out.println("Press 0 to return to main login");
+        System.out.println("Press 0 to return to login as user, 1 for admin or any other key to exit the session");
         String back=obj.next();
-        if(back=="0")
+        if(back.equals("0"))
         {
-       	 main(null);
+        System.out.println("Welcome please enter your user's credentials to login as user");
+       	 User(RtoD,  RtoE,  EtoD,  DtoE,  DtoR,  EtoR);
+        }
+        else if(back.equals("1"))
+        {
+        	System.out.println("Welcome please enter your admin's credentials to login as admin");
+        	Admin( RtoD,  RtoE,  EtoD,  DtoE,  DtoR,  EtoR);
         }
         else
        	 System.out.println("Exiting the session");
      }
 }
-
 public static void Ruppe_to_other(double amt, double RtoD, double RtoE ) {
     System.out.println("1 Ruppe = " + RtoD + " Dollar");
     System.out.println();
@@ -316,30 +330,29 @@ public static void Ruppe_to_other(double amt, double RtoD, double RtoE ) {
 }
     
 
-public static void Dollar_to_other(double amt) {
-    System.out.println("1 Dollar = " + 83.22 + " Ruppe");
+public static void Dollar_to_other(double amt, double DtoR, double DtoE) {
+    System.out.println("1 Dollar = " + DtoR + " Ruppe");
     System.out.println();
-    System.out.println(amt+" Dollar = " + String.format("%.2f",amt*83.22) + " Ruppe");
-    System.out.println();
-
-    System.out.println("1 Dollar= " + 0.91 + " Euro");
+    System.out.println(amt+" Dollar = " + String.format("%.2f",amt*DtoR) + " Ruppe");
     System.out.println();
 
-    System.out.println(amt+" Dollar = " + String.format("%.2f",amt*0.91) + " Euro");
+    System.out.println("1 Dollar= " + DtoE + " Euro");
+    System.out.println();
+
+    System.out.println(amt+" Dollar = " + String.format("%.2f",amt*DtoE) + " Euro");
 }
 
     
 
-public static void Euro_to_other(double amt){
-    System.out.println("1 Euro = " + 90.90 + " Ruppe");
+public static void Euro_to_other(double amt, double EtoR, double EtoD){
+    System.out.println("1 Euro = " + EtoR + " Ruppe");
     System.out.println();
-    System.out.println(amt+" Euro = " + String.format("%.2f",amt*90.90) + " Ruppe");
-    System.out.println();
-
-    System.out.println("1 Euro = " + 1.09 + " Dollar");
+    System.out.println(amt+" Euro = " + String.format("%.2f",amt*EtoR) + " Ruppe");
     System.out.println();
 
-    System.out.println(amt+" Euro = " + String.format("%.2f",amt*1.09) + " Dollar");
+    System.out.println("1 Euro = " + EtoD + " Dollar");
+    System.out.println();
+
+    System.out.println(amt+" Euro = " + String.format("%.2f",amt*EtoD) + " Dollar");
 }
-
 }
